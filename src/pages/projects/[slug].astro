@@ -1,0 +1,135 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+	const projects = await getCollection('projects');
+	return projects.map((project) => ({
+		params: { slug: project.id },
+		props: { project },
+	}));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<Layout title={`${project.data.title} · Jiho Lee`} description={project.data.summary}>
+	<article class="project-page">
+		<div class="container">
+			<a class="back-link" href="/#projects">← 프로젝트 목록</a>
+			<header class="project-page__header reveal">
+				<p class="project-page__period">{project.data.period}</p>
+				<h1 class="project-page__title">{project.data.title}</h1>
+				<p class="project-page__summary">{project.data.summary}</p>
+				{
+					project.data.tags.length > 0 && (
+						<ul class="project-page__tags">
+							{project.data.tags.map((tag) => (
+								<li>{tag}</li>
+							))}
+						</ul>
+					)
+				}
+			</header>
+			<div class="project-page__body reveal reveal-delay-1">
+				<Content />
+			</div>
+		</div>
+	</article>
+</Layout>
+
+<style>
+	.project-page {
+		padding-block: clamp(2.5rem, 6vw, 4rem) 4rem;
+	}
+
+	.back-link {
+		display: inline-block;
+		margin-bottom: 1.75rem;
+		font-weight: 600;
+		color: var(--ink-muted);
+		text-decoration: none;
+		transition: color 0.25s ease;
+	}
+
+	.back-link:hover {
+		color: var(--accent);
+	}
+
+	.project-page__header {
+		padding-bottom: 1.75rem;
+		margin-bottom: 1.75rem;
+		border-bottom: 1px solid var(--line);
+	}
+
+	.project-page__period {
+		font-size: 0.95rem;
+		font-weight: 600;
+		color: var(--accent);
+		margin-bottom: 0.5rem;
+	}
+
+	.project-page__title {
+		font-size: clamp(2rem, 5vw, 2.75rem);
+		margin-bottom: 0.65rem;
+	}
+
+	.project-page__summary {
+		font-size: 1.15rem;
+		color: var(--ink-muted);
+		max-width: 40rem;
+		margin-bottom: 1rem;
+	}
+
+	.project-page__tags {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem;
+	}
+
+	.project-page__tags li {
+		font-size: 0.85rem;
+		font-weight: 600;
+		padding: 0.25rem 0.6rem;
+		border: 1px solid var(--line);
+		border-radius: var(--radius);
+		color: var(--ink-muted);
+	}
+
+	.project-page__body {
+		max-width: 42rem;
+	}
+
+	.project-page__body :global(h2) {
+		font-size: 1.35rem;
+		margin-top: 2rem;
+		margin-bottom: 0.65rem;
+	}
+
+	.project-page__body :global(h3) {
+		font-size: 1.1rem;
+		margin-top: 1.4rem;
+	}
+
+	.project-page__body :global(ul),
+	.project-page__body :global(ol) {
+		padding-left: 1.25rem;
+		color: var(--ink-muted);
+	}
+
+	.project-page__body :global(li) {
+		margin-bottom: 0.35rem;
+	}
+
+	.project-page__body :global(a) {
+		color: var(--accent);
+	}
+
+	.project-page__body :global(a:hover) {
+		text-decoration-thickness: 2px;
+	}
+</style>

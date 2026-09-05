@@ -1,0 +1,49 @@
+---
+import { profile } from '../data/profile';
+---
+
+<footer class="footer">
+	<div class="container footer__inner">
+		<p class="footer__copy">© {new Date().getFullYear()} {profile.name}</p>
+		<div class="footer__links">
+			<a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+			<a href={`mailto:${profile.email}`}>{profile.email}</a>
+		</div>
+	</div>
+</footer>
+
+<style>
+	.footer {
+		border-top: 1px solid var(--line);
+		padding-block: 2rem;
+		margin-top: 2rem;
+	}
+
+	.footer__inner {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem 1.5rem;
+		justify-content: space-between;
+		align-items: center;
+		color: var(--ink-muted);
+		font-size: 0.95rem;
+	}
+
+	.footer__copy {
+		margin: 0;
+	}
+
+	.footer__links {
+		display: flex;
+		gap: 1.25rem;
+	}
+
+	.footer__links a {
+		text-decoration: none;
+		transition: color 0.25s ease;
+	}
+
+	.footer__links a:hover {
+		color: var(--accent);
+	}
+</style>

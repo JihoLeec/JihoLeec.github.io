@@ -1,0 +1,133 @@
+---
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<section class="section" id="projects">
+	<div class="container">
+		<h2 class="section-title reveal">프로젝트</h2>
+		<p class="section-lead reveal reveal-delay-1">
+			항목을 클릭하면 상세 페이지로 이동합니다. 내용은
+			<code>src/content/projects/</code> 마크다운에서 수정하세요.
+		</p>
+		<ul class="project-list">
+			{
+				projects.map((project, i) => (
+					<li class={`reveal reveal-delay-${(i % 3) + 1}`}>
+						<a class="project-link" href={`/projects/${project.id}/`}>
+							<div class="project-link__meta">
+								<span class="project-link__period">{project.data.period}</span>
+								<span class="project-link__arrow" aria-hidden="true">→</span>
+							</div>
+							<h3 class="project-link__title">{project.data.title}</h3>
+							<p class="project-link__summary">{project.data.summary}</p>
+							{project.data.tags.length > 0 && (
+								<ul class="project-link__tags">
+									{project.data.tags.map((tag) => (
+										<li>{tag}</li>
+									))}
+								</ul>
+							)}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</section>
+
+<style>
+	.project-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		gap: 1rem;
+	}
+
+	.project-link {
+		display: block;
+		padding: 1.4rem 1.25rem;
+		text-decoration: none;
+		border: 1px solid var(--line);
+		border-radius: var(--radius);
+		background: var(--surface);
+		transition:
+			border-color 0.3s ease,
+			box-shadow 0.3s ease,
+			transform 0.3s ease,
+			background 0.3s ease;
+	}
+
+	.project-link:hover {
+		border-color: var(--accent);
+		background: var(--surface-hover);
+		transform: translateY(-3px);
+		box-shadow:
+			0 0 0 3px var(--accent-soft),
+			0 0 24px var(--glow),
+			0 14px 28px rgba(0, 0, 0, 0.25);
+	}
+
+	.project-link:hover .project-link__arrow {
+		transform: translateX(4px);
+		color: var(--accent);
+	}
+
+	.project-link__meta {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 0.55rem;
+	}
+
+	.project-link__period {
+		font-size: 0.88rem;
+		font-weight: 600;
+		color: var(--accent);
+	}
+
+	.project-link__arrow {
+		font-size: 1.2rem;
+		color: var(--ink-muted);
+		transition:
+			transform 0.3s ease,
+			color 0.3s ease;
+	}
+
+	.project-link__title {
+		font-size: 1.35rem;
+		margin-bottom: 0.4rem;
+	}
+
+	.project-link__summary {
+		margin: 0;
+		color: var(--ink-muted);
+	}
+
+	.project-link__tags {
+		list-style: none;
+		margin: 0.9rem 0 0;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem;
+	}
+
+	.project-link__tags li {
+		font-size: 0.8rem;
+		font-weight: 600;
+		color: var(--ink-muted);
+		padding: 0.2rem 0.55rem;
+		border: 1px solid var(--line);
+		border-radius: var(--radius);
+	}
+
+	code {
+		font-size: 0.88em;
+		padding: 0.1em 0.35em;
+		background: var(--accent-soft);
+		border-radius: 3px;
+	}
+</style>

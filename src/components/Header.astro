@@ -1,0 +1,111 @@
+---
+import { profile } from '../data/profile';
+
+const links = [
+	{ href: '/#about', label: 'About' },
+	{ href: '/#projects', label: 'Projects' },
+	{ href: '/#experience', label: 'Experience' },
+];
+---
+
+<header class="header">
+	<div class="container header__inner">
+		<nav class="nav" aria-label="주요 메뉴">
+			{
+				links.map((link) => (
+					<a class="nav__link" href={link.href}>
+						{link.label}
+					</a>
+				))
+			}
+			<a class="nav__cta" href={profile.github} target="_blank" rel="noopener noreferrer">
+				GitHub
+			</a>
+		</nav>
+	</div>
+</header>
+
+<style>
+	.header {
+		position: sticky;
+		top: 0;
+		z-index: 50;
+		height: var(--header-h);
+		backdrop-filter: blur(14px);
+		background: rgba(20, 20, 20, 0.92);
+		border-bottom: 1px solid var(--line);
+	}
+
+	.header__inner {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		height: 100%;
+	}
+
+	.nav {
+		display: flex;
+		align-items: center;
+		gap: 0.35rem 1.1rem;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+	}
+
+	.nav__link {
+		font-size: 0.95rem;
+		color: var(--ink-muted);
+		text-decoration: none;
+		position: relative;
+		padding: 0.2rem 0;
+		transition: color 0.25s ease;
+	}
+
+	.nav__link::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		height: 2px;
+		background: var(--accent);
+		transform: scaleX(0);
+		transform-origin: left;
+		transition: transform 0.3s ease;
+	}
+
+	.nav__link:hover {
+		color: var(--ink);
+	}
+
+	.nav__link:hover::after {
+		transform: scaleX(1);
+	}
+
+	.nav__cta {
+		font-size: 0.9rem;
+		font-weight: 600;
+		text-decoration: none;
+		padding: 0.4rem 0.85rem;
+		border: 1px solid var(--line);
+		border-radius: var(--radius);
+		color: var(--ink);
+		transition:
+			background 0.25s ease,
+			color 0.25s ease,
+			box-shadow 0.25s ease,
+			border-color 0.25s ease;
+	}
+
+	.nav__cta:hover {
+		background: var(--accent);
+		border-color: var(--accent);
+		color: var(--bg);
+		box-shadow: 0 0 0 3px var(--accent-soft), 0 0 18px var(--glow);
+	}
+
+	@media (max-width: 640px) {
+		.nav__link {
+			display: none;
+		}
+	}
+</style>
