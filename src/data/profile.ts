@@ -4,7 +4,7 @@ export const profile = {
 	nameKo: '이지호',
 	role: 'Software, IT',
 	tagline: '한 줄 소개',
-	email: 'your.email@example.com',
+	email: 'jiholee.py@gmail.com',
 	github: 'https://github.com/JihoLeec',
 	/** public/images/profile.jpg 경로에 사진을 넣으면 표시됩니다 */
 	photoSrc: '/images/profile.jpg',
