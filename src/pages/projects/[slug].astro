@@ -80,11 +80,12 @@ const { Content } = await render(project);
 		color: var(--ink-muted);
 		max-width: 40rem;
 		margin-bottom: 1rem;
+		margin-left: 0.85rem;
 	}
 
 	.project-page__tags {
 		list-style: none;
-		margin: 0;
+		margin: 0 0 0 0.85rem;
 		padding: 0;
 		display: flex;
 		flex-wrap: wrap;
@@ -115,6 +116,12 @@ const { Content } = await render(project);
 		margin-top: 1.4rem;
 	}
 
+	.project-page__body :global(p),
+	.project-page__body :global(ul),
+	.project-page__body :global(ol) {
+		margin-left: 0.85rem;
+	}
+
 	.project-page__body :global(ul),
 	.project-page__body :global(ol) {
 		padding-left: 1.25rem;
@@ -123,6 +130,10 @@ const { Content } = await render(project);
 
 	.project-page__body :global(li) {
 		margin-bottom: 0.35rem;
+	}
+
+	.project-page__body :global(p) {
+		color: var(--ink-muted);
 	}
 
 	.project-page__body :global(a) {

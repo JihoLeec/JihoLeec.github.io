@@ -7,14 +7,14 @@ export type CertificationItem = {
 export const certifications: CertificationItem[] = [
 	{
 		name: '정보처리기사',
-		date: 'YYYY.MM',
+		date: '2026.09',
 	},
 	{
 		name: '빅데이터분석기사',
-		date: 'YYYY.MM',
+		date: '2026.12',
 	},
 	{
 		name: 'SQLD',
-		date: 'YYYY.MM',
+		date: '2026.12',
 	},
 ];
