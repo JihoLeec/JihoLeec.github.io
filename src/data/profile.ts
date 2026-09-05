@@ -1,6 +1,6 @@
 /** 프로필·소개 — 내용을 채워 주세요 */
 export const profile = {
-	name: 'Jiho Lee',
+	name: 'JIHO LEE',
 	nameKo: '이지호',
 	role: 'Software, IT',
 	tagline: '한 줄 소개',
