@@ -17,4 +17,12 @@ export const certifications: CertificationItem[] = [
 		name: 'SQLD',
 		date: '2026.12',
 	},
+	{
+		name: '한국사능력검정시험 n급',
+		date: '2026.12',
+	},
+	{
+		name: 'TOEIC',
+		date: '800 소망',
+	},
 ];
