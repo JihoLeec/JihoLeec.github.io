@@ -1,0 +1,149 @@
+---
+import { toys } from '../data/toys';
+---
+
+<section class="section section--compact" id="toys">
+	<div class="container">
+		<h2 class="section-title section-title--sm reveal">Toy Projects</h2>
+		<p class="section-lead section-lead--sm reveal reveal-delay-1">
+			Small experiences &amp; utilities
+		</p>
+		<ul class="toy-list">
+			{
+				toys.map((item, i) => (
+					<li class={`reveal reveal-delay-${(i % 3) + 1}`}>
+						<a class="toy-link" href={item.href} target="_blank" rel="noopener noreferrer">
+							<div class="toy-link__main">
+								<span class="toy-link__title">{item.title}</span>
+								<span class="toy-link__summary">{item.summary}</span>
+							</div>
+							<div class="toy-link__aside">
+								{item.tags && item.tags.length > 0 && (
+									<ul class="toy-link__tags">
+										{item.tags.map((tag) => (
+											<li>{tag}</li>
+										))}
+									</ul>
+								)}
+								<span class="toy-link__arrow" aria-hidden="true">↗</span>
+							</div>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</section>
+
+<style>
+	.section--compact {
+		padding-block: clamp(2rem, 5vw, 3.25rem);
+	}
+
+	.section-title--sm {
+		font-size: clamp(1.35rem, 2.8vw, 1.75rem);
+	}
+
+	.section-lead--sm {
+		font-size: 0.95rem;
+		margin-bottom: 1.15rem;
+	}
+
+	.toy-list {
+		list-style: none;
+		margin: 0;
+		padding: 0 0 0 0.85rem;
+		display: grid;
+		gap: 0;
+	}
+
+	.toy-link {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 0.7rem 0;
+		border-top: 1px solid var(--line);
+		text-decoration: none;
+		transition: color 0.25s ease;
+	}
+
+	.toy-list > li:last-child .toy-link {
+		border-bottom: 1px solid var(--line);
+	}
+
+	.toy-link__main {
+		display: grid;
+		gap: 0.15rem;
+		min-width: 0;
+	}
+
+	.toy-link__title {
+		font-weight: 700;
+		font-size: 0.98rem;
+		color: var(--ink);
+		transition: color 0.25s ease;
+	}
+
+	.toy-link__summary {
+		font-size: 0.88rem;
+		color: var(--ink-muted);
+		word-break: keep-all;
+	}
+
+	.toy-link__aside {
+		display: flex;
+		align-items: center;
+		gap: 0.65rem;
+		flex-shrink: 0;
+	}
+
+	.toy-link__tags {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.3rem;
+	}
+
+	.toy-link__tags li {
+		font-size: 0.72rem;
+		font-weight: 600;
+		color: var(--ink-muted);
+		padding: 0.12rem 0.4rem;
+		border: 1px solid var(--line);
+		border-radius: var(--radius);
+	}
+
+	.toy-link__arrow {
+		color: var(--ink-muted);
+		font-size: 0.95rem;
+		transition:
+			color 0.25s ease,
+			transform 0.25s ease;
+	}
+
+	.toy-link:hover .toy-link__title {
+		color: var(--accent-hover);
+	}
+
+	.toy-link:hover .toy-link__arrow {
+		color: var(--ink);
+		transform: translate(2px, -2px);
+	}
+
+	@media (max-width: 640px) {
+		.toy-link {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.45rem;
+			padding: 0.85rem 0;
+		}
+
+		.toy-link__aside {
+			width: 100%;
+			justify-content: space-between;
+		}
+	}
+</style>
