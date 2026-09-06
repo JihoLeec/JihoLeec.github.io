@@ -28,7 +28,7 @@ github: https://github.com/Capstone-sixsense/eye-project
 
 <img src="/images/eye/eye-notion.png" alt="result screen">
 
-또한 PM(Project Manager)의 원활한 프로젝트 일정 관리를 위해 Notion을 활용한 프로젝트 문서 및 일정 관리를 담당했습니다.
+<br>또한 PM(Project Manager)의 원활한 프로젝트 일정 관리를 위해 Notion을 활용한 프로젝트 문서 및 일정 관리를 담당했습니다.
 
 ## Retrospective
 
