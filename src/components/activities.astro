@@ -1,0 +1,122 @@
+---
+import { activities } from '../data/activities';
+
+function toDateNum(year: string, month: string, day?: string): number {
+	return Number(year) * 10000 + Number(month) * 100 + Number(day ?? '0');
+}
+
+function periodRange(period: string): { start: number; end: number } {
+	const dates = [...period.matchAll(/(\d{4})\.(\d{2})(?:\.(\d{2}))?/g)].map((match) =>
+		toDateNum(match[1], match[2], match[3]),
+	);
+	if (dates.length === 0) return { start: 0, end: 0 };
+	if (dates.length === 1) return { start: dates[0], end: dates[0] };
+	const ongoing = /ing|현재|진행/i.test(period);
+	return { start: dates[0], end: ongoing ? 99999999 : dates[dates.length - 1] };
+}
+
+const sorted = [...activities].sort((a, b) => {
+	const left = periodRange(a.period);
+	const right = periodRange(b.period);
+	if (left.end !== right.end) return left.end - right.end;
+	return left.start - right.start;
+});
+---
+
+<section class="section section--compact" id="activities">
+	<div class="container">
+		<h2 class="section-title section-title--sm reveal">Activities</h2>
+		<ul class="act-list">
+			{
+				sorted.map((item, i) => (
+					<li class={`act-item reveal reveal-delay-${(i % 3) + 1}`}>
+						<span class="act-item__period">{item.period}</span>
+						<span class="act-item__detail">
+							<span class="act-item__company">{item.company}</span>
+							<span class="act-item__role">{item.role}</span>
+						</span>
+						{item.note && <span class="act-item__note">{item.note}</span>}
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</section>
+
+<style>
+	.section--compact {
+		padding-block: clamp(2rem, 5vw, 3.25rem);
+	}
+
+	.section-title--sm {
+		font-size: clamp(1.35rem, 2.8vw, 1.75rem);
+	}
+
+	.act-list {
+		list-style: none;
+		margin: 0;
+		padding: 0 0 0 0.85rem;
+		display: flex;
+		flex-direction: column-reverse;
+	}
+
+	.act-item {
+		display: grid;
+		grid-template-columns: 12.5rem minmax(0, 1fr) auto;
+		column-gap: 2.75rem;
+		align-items: baseline;
+		padding: 0.7rem 0;
+		border-top: 1px solid var(--line);
+		font-size: 0.98rem;
+		line-height: 1.45;
+	}
+
+	.act-item:first-child {
+		border-bottom: 1px solid var(--line);
+	}
+
+	.act-item__period {
+		font-weight: 600;
+		color: var(--accent);
+		white-space: nowrap;
+	}
+
+	.act-item__detail {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.65rem 1.1rem;
+		min-width: 0;
+	}
+
+	.act-item__company {
+		font-weight: 700;
+		color: var(--ink);
+	}
+
+	.act-item__role {
+		color: var(--ink-muted);
+	}
+
+	.act-item__note {
+		color: var(--ink-muted);
+		font-size: calc(0.98rem - 3pt);
+		text-align: right;
+		justify-self: end;
+		max-width: 22rem;
+	}
+
+	@media (max-width: 640px) {
+		.act-item {
+			grid-template-columns: 1fr;
+			column-gap: 0;
+			row-gap: 0.2rem;
+		}
+
+		.act-item__note {
+			text-align: left;
+			justify-self: start;
+			max-width: none;
+		}
+	}
+</style>
