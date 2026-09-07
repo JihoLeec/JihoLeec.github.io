@@ -26,7 +26,7 @@ export const activities: ActivityItem[] = [
 	},
 	{
 		company: '백준',
-		role: '골드 3, Class 4',
+		role: 'Gold 3, Class 4',
 		period: '2024.02 - 2026.04',
 		note: '최장 스트릭 기록 793일',
 	},
