@@ -13,4 +13,10 @@ export const toys: ToyProject[] = [
 		tags: ['Python'],
 		href: 'https://github.com/JihoLeec/k-edu-course-crawler',
 	},
+	{
+		title: '강의 요약 생성기 및 퀴즈 생성기',
+		summary: '강의 음성을 업로드해 텍스트로 변환해 요약한 내용을 기반으로 퀴즈를 생성하는 웹 어플리케이션',
+		tags: ['Python', 'Flask', 'KoBART'],
+		href: 'https://github.com/JihoLeec/OS_15',
+	},
 ];

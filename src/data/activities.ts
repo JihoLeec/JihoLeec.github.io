@@ -9,7 +9,7 @@ export type ActivityItem = {
 export const activities: ActivityItem[] = [
 	{
 		company: '글로벌하이텍전자',
-		role: '국가교외근로장학생',
+		role: '국가근로장학',
 		period: '2024.03 - 2024.08',
 	},
 	{
