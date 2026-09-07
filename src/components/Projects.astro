@@ -7,8 +7,6 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 <section class="section" id="projects">
 	<div class="container">
 		<h2 class="section-title reveal">Projects</h2>
-		<p class="section-lead reveal reveal-delay-1">
-		</p>
 		<ul class="project-list">
 			{
 				projects.map((project, i) => (
@@ -120,12 +118,5 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 		padding: 0.2rem 0.55rem;
 		border: 1px solid var(--line);
 		border-radius: var(--radius);
-	}
-
-	code {
-		font-size: 0.88em;
-		padding: 0.1em 0.35em;
-		background: var(--accent-soft);
-		border-radius: 3px;
 	}
 </style>

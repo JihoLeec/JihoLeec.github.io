@@ -15,8 +15,7 @@ import { certifications } from '../data/certifications';
 					width="400"
 					height="480"
 				/>
-				<div class="photo-slot__placeholder" hidden>
-				</div>
+				<div class="photo-slot__placeholder" hidden>{profile.name}</div>
 			</div>
 		</div>
 
@@ -55,7 +54,6 @@ import { certifications } from '../data/certifications';
 										<strong>{item.name}</strong>
 										<span class="credentials__period">{item.date}</span>
 									</div>
-									<p class="credentials__meta">{item.issuer}</p>
 								</li>
 							))
 						}
@@ -110,7 +108,6 @@ import { certifications } from '../data/certifications';
 		font-weight: 700;
 		letter-spacing: -0.015em;
 		line-height: 1.12;
-		font-stretch: normal;
 	}
 
 	.photo-slot {
@@ -150,16 +147,11 @@ import { certifications } from '../data/certifications';
 		text-align: center;
 		padding: 1.5rem;
 		color: var(--ink-muted);
+		font-weight: 700;
+		font-size: 1.15rem;
 		border: 2px dashed color-mix(in srgb, var(--ink) 22%, transparent);
 		margin: 0.75rem;
 		border-radius: var(--radius);
-	}
-
-	.photo-slot__placeholder span {
-		font-family: var(--font-display);
-		font-weight: 700;
-		font-size: 1.15rem;
-		color: var(--ink);
 	}
 
 	.credentials {
@@ -172,7 +164,6 @@ import { certifications } from '../data/certifications';
 	}
 
 	.credentials__label {
-		font-family: var(--font-display);
 		font-size: 1.02rem;
 		font-weight: 700;
 		letter-spacing: -0.01em;
@@ -210,7 +201,6 @@ import { certifications } from '../data/certifications';
 	}
 
 	.credentials__row strong {
-		font-family: var(--font-body);
 		font-size: 0.91rem;
 		font-weight: 700;
 		color: var(--accent);
@@ -221,13 +211,6 @@ import { certifications } from '../data/certifications';
 		font-weight: 600;
 		color: var(--ink-muted);
 		white-space: nowrap;
-	}
-
-	.credentials__meta,
-	.credentials__detail {
-		margin: 0.2rem 0 0;
-		font-size: 0.95rem;
-		color: var(--ink-muted);
 	}
 
 	@media (max-width: 800px) {

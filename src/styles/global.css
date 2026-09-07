@@ -2,7 +2,6 @@
 	color-scheme: dark;
 	/* 중립 쿨그레이 (블루/남색 기운 최소화) */
 	--bg: #141414;
-	--bg-soft: #1a1a1a;
 	--ink: #ececec;
 	--ink-muted: #9a9a9a;
 	--accent: #b3b3b3;
@@ -13,8 +12,7 @@
 	--surface: rgba(255, 255, 255, 0.04);
 	--surface-hover: rgba(255, 255, 255, 0.07);
 	--radius: 4px;
-	--font-display: 'Nanum Gothic', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-	--font-body: 'Nanum Gothic', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+	--font: 'Nanum Gothic', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
 	--space: clamp(1.25rem, 3vw, 2rem);
 	--max: 68rem;
 	--header-h: 4rem;
@@ -34,7 +32,7 @@ body {
 	margin: 0;
 	min-height: 100vh;
 	color: var(--ink);
-	font-family: var(--font-body);
+	font-family: var(--font);
 	font-size: 1.0625rem;
 	line-height: 1.65;
 	background:
@@ -69,7 +67,7 @@ img {
 h1,
 h2,
 h3 {
-	font-family: var(--font-display);
+	font-family: var(--font);
 	font-weight: 700;
 	line-height: 1.2;
 	letter-spacing: -0.02em;
@@ -103,6 +101,19 @@ p {
 	color: var(--ink-muted);
 	max-width: 36rem;
 	margin-bottom: 2rem;
+}
+
+.section--compact {
+	padding-block: clamp(2rem, 5vw, 3.25rem);
+}
+
+.section-title--sm {
+	font-size: clamp(1.35rem, 2.8vw, 1.75rem);
+}
+
+.section-lead--sm {
+	font-size: 0.95rem;
+	margin-bottom: 1.15rem;
 }
 
 .reveal {
