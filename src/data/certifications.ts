@@ -6,23 +6,23 @@ export type CertificationItem = {
 
 export const certifications: CertificationItem[] = [
 	{
-		name: '정보처리기사',
-		date: '2026.09',
+		name: '정보처리기사 필기 합격', 
+		date: '2026.03.11',
 	},
 	{
-		name: '빅데이터분석기사',
-		date: '2026.12',
+		name: '빅데이터분석기사 필기 합격',
+		date: '2026.09.23',
 	},
-	{
-		name: 'SQLD',
-		date: '2026.12',
-	},
-	{
-		name: '한국사능력검정시험 n급',
-		date: '2026.12',
-	},
-	{
-		name: 'TOEIC',
-		date: '800 소망',
-	},
+	// {
+	// 	name: 'SQLD',
+	// 	date: '2026.12',
+	// },
+	// {
+	// 	name: '한국사능력검정시험 n급',
+	// 	date: '2026.12',
+	// },
+	// {
+	// 	name: 'TOEIC',
+	// 	date: '615',
+	// },
 ];
