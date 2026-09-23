@@ -9,6 +9,6 @@ export const education: EducationItem[] = [
 	{
 		school: '단국대학교',
 		degree: '소프트웨어학과',
-		period: '2023.03 - 2027.02',
+		period: '2023.03 - 2027.02 졸업 예정',
 	},
 ];
