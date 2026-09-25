@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "Side-B 추천 데이터플로우",
+    "output": "docs/diagrams/sideb-recommend.dataflow.html",
+    "viewBox": [1080, 620],
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "request-path",
+        "label": "요청 경로",
+        "focus": ["flutter", "api", "normalize"],
+        "note": "Flutter 검색 쿼리가 nginx /api를 거쳐 FastAPI POST /recommend로 들어갑니다."
+      },
+      {
+        "id": "seed-resolve",
+        "label": "시드 정규화",
+        "focus": ["normalize", "itunes", "lastfm"],
+        "note": "normalize_input이 iTunes로 기준 트랙을 잡고 Last.fm으로 보정합니다."
+      },
+      {
+        "id": "recommend-buckets",
+        "label": "4버킷 추천",
+        "focus": ["buckets", "lastfm", "deezer", "result"],
+        "note": "recommend_algo가 Last.fm·Deezer로 4개 버킷을 채운 뒤 ResultScreen에 전달합니다."
+      }
+    ]
+  },
+  "stages": [
+    { "label": "입력" },
+    { "label": "API" },
+    { "label": "시드 정규화" },
+    { "label": "추천·보강" },
+    { "label": "결과" }
+  ],
+  "nodes": [
+    {
+      "id": "flutter",
+      "type": "frontend",
+      "label": "Flutter Web",
+      "sublabel": "검색 API",
+      "stage": 0,
+      "row": 1,
+      "tag": "query"
+    },
+    {
+      "id": "api",
+      "type": "backend",
+      "label": "FastAPI",
+      "sublabel": "nginx → /recommend",
+      "stage": 1,
+      "row": 1,
+      "tag": "main.py",
+      "width": 140
+    },
+    {
+      "id": "itunes",
+      "type": "external",
+      "label": "iTunes Search",
+      "sublabel": "catalog match",
+      "stage": 2,
+      "row": 0,
+      "tag": "시드"
+    },
+    {
+      "id": "normalize",
+      "type": "backend",
+      "label": "normalize_input",
+      "sublabel": "시드 트랙 해석",
+      "stage": 2,
+      "row": 1,
+      "tag": "recommend_algo",
+      "width": 140
+    },
+    {
+      "id": "lastfm",
+      "type": "external",
+      "label": "Last.fm",
+      "sublabel": "similar · tags · top",
+      "stage": 3,
+      "row": 0,
+      "tag": "pylast",
+      "width": 140
+    },
+    {
+      "id": "buckets",
+      "type": "backend",
+      "label": "recommend_algo",
+      "sublabel": "4 recommendation buckets",
+      "stage": 3,
+      "row": 1,
+      "tag": "4 buckets",
+      "width": 160
+    },
+    {
+      "id": "deezer",
+      "type": "external",
+      "label": "Deezer",
+      "sublabel": "cover · rank · preview",
+      "stage": 3,
+      "row": 2,
+      "tag": "enrich",
+      "width": 140
+    },
+    {
+      "id": "result",
+      "type": "frontend",
+      "label": "ResultScreen",
+      "sublabel": "RecommendResponse",
+      "stage": 4,
+      "row": 1,
+      "tag": "UI",
+      "width": 140
+    }
+  ],
+  "flows": [
+    {
+      "id": "query-in",
+      "from": "flutter",
+      "to": "api",
+      "label": "query · top_n",
+      "classification": "검색 요청",
+      "variant": "emphasis",
+      "route": "straight"
+    },
+    {
+      "id": "dispatch-normalize",
+      "from": "api",
+      "to": "normalize",
+      "label": "검색 문자열",
+      "classification": "시드 해석",
+      "variant": "emphasis",
+      "route": "straight"
+    },
+    {
+      "id": "itunes-seed",
+      "from": "itunes",
+      "to": "normalize",
+      "label": "시드 메타",
+      "classification": "카탈로그 매칭",
+      "variant": "default",
+      "route": "straight",
+      "labelDy": 44
+    },
+    {
+      "id": "seed-to-algo",
+      "from": "normalize",
+      "to": "buckets",
+      "label": "seed track",
+      "classification": "기준 트랙",
+      "variant": "emphasis",
+      "route": "straight",
+      "labelDy": 28
+    },
+    {
+      "id": "lastfm-signals",
+      "from": "lastfm",
+      "to": "buckets",
+      "label": "similar · tags",
+      "classification": "추천 신호",
+      "variant": "emphasis",
+      "route": "straight",
+      "labelDy": 44
+    },
+    {
+      "id": "deezer-enrich",
+      "from": "deezer",
+      "to": "buckets",
+      "label": "cover · rank",
+      "classification": "메타데이터 보강",
+      "variant": "default",
+      "route": "straight",
+      "labelAt": [745, 328]
+    },
+    {
+      "id": "response-out",
+      "from": "buckets",
+      "to": "result",
+      "label": "4버킷 JSON",
+      "classification": "RecommendResponse",
+      "variant": "emphasis",
+      "route": "straight",
+      "labelAt": [858, 314]
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "주 경로",
+      "items": [
+        "Flutter → nginx /api → FastAPI /recommend → normalize → 4버킷 → ResultScreen",
+        "영속 DB 없음 — 요청 메모리와 외부 API만 사용"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "외부 카탈로그",
+      "items": [
+        "iTunes 시드 · Last.fm 추천 신호 · Deezer cover/rank/preview",
+        "시드 실패 시 tag_based_recommendations로 동일 4버킷"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "코드 경계",
+      "items": [
+        "라이브: main.py + recommend_algo.py · Gemini/search_pipeline 미마운트",
+        "Redis는 compose만 존재, 추천 경로에서 미사용"
+      ]
+    }
+  ]
+}

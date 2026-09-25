@@ -21,7 +21,9 @@ github: https://github.com/Capstone-sixsense/eye-project/tree/frontend
 단순히 결과값만 제공하는 것이 아니라, 분석 가능한 이미지인지 먼저 확인하고, 병변 위치를 시각적으로 표시한 뒤 분석 결과를 pdf 형태로 제공하는 흐름으로 사용자가 결과를 이해할 수 있도록 하는 데 초점을 맞췄습니다.
 
 ※ 본 프로젝트는 의료진의 진단을 대체하기 위한 목적이 아닌, 의료적 판단을 보조하기 위한 프로토타입으로 진행된 프로젝트입니다.  
-<br><br>
+<br>
+
+<p class="pipeline-shortcut"><a href="/pipelines/retinai.html" target="_blank" rel="noopener noreferrer">파이프라인 보기 →</a></p>
 
 ---
 <br>

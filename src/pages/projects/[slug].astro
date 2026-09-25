@@ -147,6 +147,20 @@ const { Content } = await render(project);
 		text-decoration-thickness: 2px;
 	}
 
+	.project-page__body :global(.pipeline-shortcut) {
+		margin: 0 0 0.85rem 0.85rem;
+		font-weight: 600;
+	}
+
+	.project-page__body :global(.pipeline-shortcut a) {
+		text-decoration: none;
+	}
+
+	.project-page__body :global(.pipeline-shortcut a:hover) {
+		text-decoration: underline;
+		text-decoration-thickness: 2px;
+	}
+
 	.project-page__body :global(.project-media-row) {
 		display: flex;
 		align-items: flex-start;

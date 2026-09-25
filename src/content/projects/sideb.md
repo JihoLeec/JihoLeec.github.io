@@ -19,7 +19,9 @@ github: https://github.com/Capstone-sixsense/KH-Hackathon
 경희대 해커톤 주제인 "대중문화의 구조적 문제"에 맞춰, 인기곡만 밀어 주는 스트리밍 추천을 피해 가려진 B-side 음악을 찾아 주는 서비스로 Side-B를 만들었습니다.  
 사용자가 곡이나 아티스트, 키워드를 입력하면 유사 추천, 반대 스타일, 반대 무드, 숨은 곡 후보를 함께 보여 줍니다.
 <br>초반에는 Spotify API를 썼으나 호출 횟수 제한에 걸려, 발표 직전에 iTunes·Deezer·Last.fm 공개 API로 바꿨습니다.  
-<br><br>
+<br>
+
+<p class="pipeline-shortcut"><a href="/pipelines/sideb.html" target="_blank" rel="noopener noreferrer">파이프라인 보기 →</a></p>
 
 ---
 <br>
