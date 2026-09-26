@@ -1,7 +1,7 @@
 ---
 import { profile } from '../data/profile';
 import { education } from '../data/education';
-import { certifications } from '../data/certifications';
+import { certifications, certificationsPrep } from '../data/certifications';
 ---
 
 <section class="hero section" id="about">
@@ -57,6 +57,23 @@ import { certifications } from '../data/certifications';
 							))
 						}
 					</ul>
+					{
+						certificationsPrep.length > 0 && (
+							<details class="credentials__prep">
+								<summary class="credentials__prep-toggle">취득 중</summary>
+								<ul class="credentials__list credentials__list--prep">
+									{certificationsPrep.map((item) => (
+										<li class="credentials__item">
+											<div class="credentials__row">
+												<span class="credentials__prep-name">{item.name}</span>
+												<span class="credentials__period">{item.date}</span>
+											</div>
+										</li>
+									))}
+								</ul>
+							</details>
+						)
+					}
 				</div>
 			</div>
 		</div>
@@ -210,6 +227,53 @@ import { certifications } from '../data/certifications';
 		font-weight: 600;
 		color: var(--ink-muted);
 		white-space: nowrap;
+	}
+
+	.credentials__prep {
+		margin-top: 0.35rem;
+		padding-left: 0.85rem;
+	}
+
+	.credentials__prep-toggle {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3rem;
+		font-size: 0.78rem;
+		font-weight: 500;
+		color: color-mix(in srgb, var(--ink-muted) 72%, transparent);
+		cursor: pointer;
+		list-style: none;
+		user-select: none;
+	}
+
+	.credentials__prep-toggle::-webkit-details-marker {
+		display: none;
+	}
+
+	.credentials__prep-toggle::after {
+		content: '▸';
+		font-size: 1.3em;
+		line-height: 1;
+		transition: transform 0.15s ease;
+	}
+
+	.credentials__prep[open] > .credentials__prep-toggle::after {
+		transform: rotate(90deg);
+	}
+
+	.credentials__prep-toggle:hover {
+		color: var(--ink-muted);
+	}
+
+	.credentials__list--prep {
+		margin-top: 0.35rem;
+		gap: 0.2rem;
+	}
+
+	.credentials__prep-name {
+		font-size: 0.86rem;
+		font-weight: 600;
+		color: var(--ink-muted);
 	}
 
 	@media (max-width: 800px) {
